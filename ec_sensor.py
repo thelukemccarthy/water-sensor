@@ -28,13 +28,6 @@ class EcSensor:
         self._calculate_slope()
 
     def __read_raw(self):
-        #raw = self.bus.read_word_data(self.address, 1)
-        #raw1 = self.bus.read_word_data(self.address, 2)
-        #raw2 = self.bus.read_word_data(self.address, 3)
-        #raw3 = self.bus.read_word_data(self.address, 4)
-        #raw = (raw1 << 8) + raw2
-        #raw3 = self.bus.read_byte_data(self.address, 1)
-        #print("{0}, {1}, {2}, {3}".format(result, raw1, raw2, raw3))
         raw1 = self.bus.read_byte_data(self.address, 2)
         raw2 = self.bus.read_byte_data(self.address, 3)
         raw = (raw1 << 8) + raw2
