@@ -1,6 +1,8 @@
 import smbus
 from sensor_dto import *
 
+import pickle
+import os.path
 class EcSensorSettings:
     def __init__(self):
         # default settings
@@ -10,7 +12,17 @@ class EcSensorSettings:
         self.ec_step = 60
 
     def save(self):
-        print("Save not implemented.")
+        with open('ec_settings.config', 'wb') as output:
+            pickle.dump(self, output, pickle.HIGHEST_PROTOCOL)
+
+    def load(self):
+        if(os.path.exists('ec_settings.config')):
+            with open('ec_settings.config', 'rb') as input:
+                temp = pickle.load(input)
+                self.write_check = temp.write_check
+                self.low_ec_calibration = temp.low_ec_calibration
+                self.high_ec_calibration = temp.high_ec_calibration
+                self.ec_step = temp.ec_step
 
 class EcSensor:
     def __init__(self):
